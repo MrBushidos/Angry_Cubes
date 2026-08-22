@@ -1,20 +1,15 @@
-# Angry Cubes - Mobile AR Physics Sandbox
+# 🚜 Crazy Farm
 
-## Overview
-An exploratory Augmented Reality (AR) prototype built to study spatial computing and mobile AR deployment. Based on an educational framework, the goal of this project was to get hands-on experience configuring AR SDKs, handling camera passthrough, and managing physics interactions in mixed reality.
+## 📖 Overview
+This repository contains a 3D top-down shooter built in Unity. Originally provided as a university base project, I expanded the codebase by engineering a dynamic difficulty curve, integrating interconnected game systems, and building a complete game loop from the main menu to the game-over state.
 
-## Tech Stack
-*   **Engine:** Unity
-*   **Framework:** AR Foundation / XR Interaction Toolkit
-*   **Target:** Mobile AR
+## 🛠️ Tech Stack
+* **Engine:** Unity
+* **Language:** C#
 
-## Core Implementations
-*   **Spatial Mapping:** Configured AR Plane Manager to scan environments and detect horizontal/vertical surfaces to anchor digital objects.
-*   **Raycasting & Instantiation:** Implemented screen-to-world raycasting to allow users to spawn 3D geometry (blocks, planks) directly onto detected real-world planes.
-*   **Mixed Reality Physics:** Configured Unity's Rigidbody and Collider systems to allow physical projectiles to interact with instantiated structures in physical space.
-
-## Technical Notes & Known Issues (WIP)
-Currently debugging a specific Rigidbody/Collider resolution issue within the physics engine:
-*   **The "Plank" Collider Bug:** The "Plank" prefab currently has an improperly scaled BoxCollider. 
-*   **Behavior:** This prevents accurate raycast placement on top of it. Furthermore, if a Plank is spawned intersecting existing blocks, the physics engine attempts to resolve the overlapping colliders immediately on `Start()`. This results in a massive, instantaneous application of force, causing the structures to scatter violently.
-*   **Planned Fix:** Recalculate the bounding box dimensions on the prefab and experiment with `Continuous` vs. `Discrete` collision detection to prevent tunneling/overlap on spawn.
+## 🚀 Key Systems & Features Implemented
+* **Event-Driven Progression (GameManager):** Implemented modular logic to track score thresholds and trigger global game state changes. Programmed a milestone system that spawns a special high-value entity (Rooster) at exact 20-point intervals using modulo operators.
+* **Dynamic Difficulty Curve:** Engineered a system that increases global game speed every 50 points ramping up the difficulty.
+* **Dynamic Audio Pitching:** Created an audio controller that responds to the difficulty curve. As the game speeds up, the background music pitch increases proportionally (capped at 2.0x) to artificially build player tension.
+* **Component Modularity:** Exposed key variables to the Unity Editor, allowing different enemy prefabs to have unique speeds and point values without requiring redundant or hardcoded scripts.
+* **Game Loop & Scene Management:** Built the core UI (Health, Score) and a complete state loop. Upon player death, the game halts spawning, displays the Game Over state, and utilizes Coroutines/Invokes to smoothly transition back to the custom Title Screen.
